@@ -33,10 +33,9 @@ namespace DocusignTutorial.Controllers
 
 
             var appSettings = ConfigurationManager.AppSettings;
-
-            string username = appSettings["username"] ?? "Not Found"; 			// your account email
-            string password = appSettings["password"] ?? "Not Found"; 			// your account password
-            string integratorKey = appSettings["IntegratorKey"] ?? "Not Found";			// your account Integrator Key (found on Preferences -> API page)
+            string username = appSettings["username"] ?? "Not Found"; 			 
+            string password = appSettings["password"] ?? "Not Found"; 			 
+            string integratorKey = appSettings["IntegratorKey"] ?? "Not Found";			 
 			
             string envelopeId = "***";			// valid envelopeId of an envelope in your account
 			//---------------------------------------------------------------------------------------------------
@@ -62,23 +61,9 @@ namespace DocusignTutorial.Controllers
 				baseURL = parseDataFromResponse(response, "baseUrl");
 				
 				//--- display results
-				Console.WriteLine("\nAPI Call Result: \n\n" + prettyPrintXml(response));
-				
-				//============================================================================
-				//  STEP 2 - Get Envelope Information
-				//============================================================================
-				
-				// append "/envelopes/{envelopeId}/recipientId" to baseURL and use as endpoint for Get Recipient Status api call
-				url = baseURL + "/envelopes/" + envelopeId + "/recipients";
-				
-				// set request url, method, and headers
-				request = initializeRequest( url, "GET", null, username, password, integratorKey);
-				
-				// read the http response
-				response = getResponseBody(request);
-				
-				//--- display results
 				Debug.Print("\nAPI Call Result: \n\n" + prettyPrintXml(response));
+				
+				
 			}
 			catch (WebException e) {
 				using (WebResponse response = e.Response) {
@@ -92,6 +77,9 @@ namespace DocusignTutorial.Controllers
 				}
 			}
 		} // end main()
+
+
+        
 		
 		//***********************************************************************************************
 		// --- HELPER FUNCTIONS ---
